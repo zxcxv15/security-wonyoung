@@ -1,13 +1,20 @@
 package com.study.security_wonyoung.wep.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
+import com.study.security_wonyoung.service.auth.PrincipalDetails;
+
+@Controller 
 public class PageController {
 	
 	@GetMapping({"/", "/index"})
-	public String loadIndex() {
+	public String loadIndex(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		
+		model.addAttribute("principal", principalDetails); // model 서버 사이드 렌더링
+		
 		return "index";
 	}
 	
